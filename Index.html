@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A birthday surprise</title>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffe0ec;--ink:#6b1d44;--pink:#ff4f93;--sun:#ffb3d1;--mint:#ff8fc0;--card:#fff5f9;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#3a1128;--ink:#ffd9e8;--card:#55183a}}
+:root[data-theme="dark"]{--bg:#3a1128;--ink:#ffd9e8;--card:#55183a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:800 17px/1.5 Nunito,system-ui,sans-serif;text-align:center;min-height:100vh;overflow-x:hidden}
+.s{display:none;min-height:100vh;padding:28px 22px;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.s.on{display:flex;animation:in .5s ease}
+@keyframes in{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+h1{font:400 clamp(34px,10vw,54px)/1.05 "Bagel Fat One",Georgia,serif;margin:0;color:var(--pink);transform:rotate(-2deg)}
+p{margin:0;max-width:30ch;font-weight:600}
+.big{font-size:84px;line-height:1}
+button{font:inherit;font-weight:800;border:3px solid var(--ink);background:var(--sun);color:#6b1d44;border-radius:999px;padding:12px 26px;cursor:pointer;box-shadow:0 5px 0 var(--ink);transition:transform .1s,box-shadow .1s}
+button:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+.yes{background:var(--mint)}.no{background:#ffd0dc;position:relative}
+.row{display:flex;gap:18px;align-items:center;justify-content:center;min-height:70px}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:22px;padding:22px;max-width:340px;box-shadow:6px 6px 0 var(--pink);text-align:left}
+.card p{max-width:none;margin:0 0 10px}
+#gift{font-size:110px;background:none;border:0;box-shadow:none;padding:0;animation:wob 1.6s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.cake{position:relative;width:240px;height:250px;margin-top:8px}
+.layer{position:absolute;left:0;right:0;border:3px solid var(--ink);border-radius:14px 14px 10px 10px}
+.layer::before{content:"";position:absolute;left:-3px;right:-3px;top:-3px;height:16px;background:#fff;border:3px solid var(--ink);border-radius:14px}
+.layer::after{content:"";position:absolute;left:4px;right:4px;top:12px;height:16px;background:radial-gradient(circle at 12px 0,#fff 10px,transparent 11px) 0 0/34px 16px repeat-x}
+.plate{position:absolute;bottom:0;left:-22px;right:-22px;height:26px;background:#fff;border:3px solid var(--ink);border-radius:50%;box-shadow:0 5px 0 rgba(107,29,68,.25)}
+.fl{position:absolute;font-size:22px;z-index:2}
+.l1{bottom:12px;height:64px;background:radial-gradient(circle,#fff 2px,transparent 2.5px) 0 0/22px 18px,#ff4f93}
+.l2{bottom:76px;left:26px;right:26px;height:52px;background:radial-gradient(circle,#fff 2px,transparent 2.5px) 6px 4px/22px 18px,#ffb3d1}
+.l3{bottom:128px;left:58px;right:58px;height:42px;background:radial-gradient(circle,#fff 2px,transparent 2.5px) 3px 2px/22px 18px,#ff8fc0}
+.cd{background:repeating-linear-gradient(-45deg,#fff 0 6px,#ff8fc0 6px 12px)}
+.cd{position:absolute;bottom:168px;width:16px;height:46px;background:var(--mint);border:3px solid var(--ink);border-radius:5px;cursor:pointer;padding:0;box-shadow:none}
+.cd::before{content:"🔥";position:absolute;top:-34px;left:-6px;font-size:22px;animation:fl .4s infinite alternate}
+.cd.out::before{content:"💨";animation:none;opacity:.7}
+@keyframes fl{to{transform:scale(1.15) rotate(6deg)}}
+.hint{font-size:15px;opacity:.8;min-height:24px}
+.cd{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.cd::after{content:"";position:absolute;inset:-40px -8px -4px}
+.cd.hold::before{animation:shrink .9s linear forwards}
+@keyframes shrink{to{transform:scale(.3);opacity:.4}}
+#blow{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;background:linear-gradient(#ff4f93,#ff4f93) no-repeat left/0% 100%,#ffb3d1;transition:background-size .2s,transform .1s,box-shadow .1s}
+#blow.hold{background-size:100% 100%;transition:background-size 1.2s linear,transform .1s,box-shadow .1s}
+.deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.deco span{position:absolute;font-size:40px;opacity:.6;animation:sway 6s ease-in-out infinite alternate}
+@keyframes sway{to{transform:rotate(14deg) translateY(-8px)}}
+.s{position:relative;z-index:1}
+.conf{position:fixed;top:-20px;font-size:26px;pointer-events:none;animation:fall linear forwards;z-index:9}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+@media (prefers-reduced-motion:reduce){#gift,.cd::before{animation:none}.s.on{animation:none}.conf{display:none}.deco span{animation:none}}
+</style>
+</head>
+<body>
+<div class="deco" aria-hidden="true">
+<span style="top:3%;left:5%">🌸</span><span style="top:6%;right:8%;animation-delay:-2s">🌷</span><span style="top:30%;left:-2%;font-size:54px">🌺</span><span style="top:38%;right:-2%;font-size:50px;animation-delay:-3s">🌸</span><span style="bottom:22%;left:6%;animation-delay:-1s">💐</span><span style="bottom:6%;right:6%;font-size:52px">🌹</span><span style="bottom:4%;left:38%;animation-delay:-4s">🌷</span><span style="top:18%;left:44%;font-size:26px;animation-delay:-5s">🌸</span>
+</div>
+<section class="s on" id="s1">
+  <div class="big">🌸</div>
+  <h1>Psst… it’s your birthday!</h1>
+  <p>I made a tiny surprise just for you.</p>
+  <button onclick="go(2)">Open it</button>
+</section>
+
+<section class="s" id="s2">
+  <h1>A gift for you</h1>
+  <button id="gift" aria-label="Open the gift" onclick="go(3)">🎁</button>
+  <p class="hint">Tap the box</p>
+</section>
+
+<section class="s" id="s3">
+  <div class="card">
+    <p style="font-size:22px">Happy birthday, Nicole! 🌸</p>
+    <p>Wishing you the best day, Neng. Love you. 💗</p>
+    <p>Ikaw ang isa sa mga gift nga nabaton ko sa akon life. Ikaw ang nagpuno sang kulang sa heart ko, ikaw ang nagpatibok sini, ikaw ang nagmelt sang cold heart ko.</p>
+    <p>Love you, Neng. LOVE YOU VERY VERY MUCHHHHHHH! 💖</p>
+    <p style="font-size:22px">HAPPY BIRTHDAY! 🎂</p>
+  </div>
+  <button onclick="go(4)">Keep going</button>
+</section>
+
+<section class="s" id="s4">
+  <h1>Make a wish</h1>
+  <p>Press and hold the button to blow out the candles.</p>
+  <div class="cake" aria-label="Three-tier birthday cake with three candles">
+    <div class="plate"></div>
+    <div class="layer l1"></div><div class="layer l2"></div><div class="layer l3"></div>
+    <span class="fl" style="bottom:30px;left:10px">🌸</span><span class="fl" style="bottom:30px;right:10px">🌸</span><span class="fl" style="bottom:30px;left:108px">🌷</span>
+    <span class="fl" style="bottom:92px;left:40px;font-size:18px">🌸</span><span class="fl" style="bottom:92px;right:40px;font-size:18px">🌸</span>
+    <button class="cd" style="left:78px" aria-label="Blow out candle"></button>
+    <button class="cd" style="left:112px" aria-label="Blow out candle"></button>
+    <button class="cd" style="left:146px" aria-label="Blow out candle"></button>
+  </div>
+  <p class="hint" id="wish"></p>
+  <button id="blow">Hold to blow the candles 🌬️</button>
+  <button id="next4" style="display:none" onclick="go(5)">Wish made</button>
+</section>
+
+<section class="s" id="s5">
+  <div class="big">💍</div>
+  <h1>Will you be my forever?</h1>
+  <p>I promise to love you today and always. Deal?</p>
+  <div class="row">
+    <button class="yes" onclick="yes()">Yes!</button>
+    <button class="no" id="no" onmouseover="dodge()" ontouchstart="dodge(event)" onclick="dodge()">No</button>
+  </div>
+  <p class="hint">Choose wisely… 👀</p>
+</section>
+
+<section class="s" id="s6">
+  <div class="big">🌷</div>
+  <h1>Yaaay!</h1>
+  <p>Best answer ever. You just made me the happiest person. I love you, Neng. 💗</p>
+  <p>Happy birthday once again. 💗</p>
+</section>
+
+<script>
+function go(n){
+  document.querySelectorAll('.s').forEach(function(e){e.classList.remove('on')});
+  document.getElementById('s'+n).classList.add('on');
+  if(n===3)burst(18);
+  window.scrollTo(0,0);
+}
+function burst(k){
+  var em=['🌸','🌷','🌺','💗','✨','🌹'];
+  for(var i=0;i<k;i++){
+    var d=document.createElement('div');
+    d.className='conf';d.textContent=em[i%em.length];
+    d.style.left=Math.random()*95+'vw';
+    d.style.animationDuration=(2+Math.random()*2.5)+'s';
+    d.style.animationDelay=(Math.random()*.6)+'s';
+    document.body.appendChild(d);
+    setTimeout(function(x){x.remove()},5500,d);
+  }
+}
+var left=3;
+(function(){
+ var b=document.getElementById('blow'),t=null;
+ function stop(){if(t){clearTimeout(t);t=null}b.classList.remove('hold')}
+ b.addEventListener('pointerdown',function(e){
+  if(b.disabled)return;e.preventDefault();b.classList.add('hold');
+  t=setTimeout(function(){t=null;b.classList.remove('hold');if(navigator.vibrate){try{navigator.vibrate(40)}catch(x){}}blowAll()},1200);
+ });
+ ['pointerup','pointerleave','pointercancel'].forEach(function(ev){b.addEventListener(ev,stop)});
+ b.addEventListener('contextmenu',function(e){e.preventDefault()});
+ b.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&!b.disabled){e.preventDefault();blowAll()}});
+})();
+function blowAll(){
+  var b=document.getElementById('blow');b.disabled=true;
+  document.querySelectorAll('.cd').forEach(function(c,i){
+    setTimeout(function(){if(!c.classList.contains('out'))blown(c)},i*350);
+  });
+}
+function blown(c){
+  c.classList.remove('hold');c.classList.add('out');left--;
+  var w=document.getElementById('wish');
+  if(left===0){
+    w.textContent='Wish made. No peeking at what it was! 🤫';
+    document.getElementById('next4').style.display='inline-block';
+    document.getElementById('blow').style.display='none';
+    burst(24);
+  }else{w.textContent='Nice! '+left+' more to go…'}
+}
+document.querySelectorAll('.cd').forEach(function(c){
+  var t=null;
+  function stop(){if(t){clearTimeout(t);t=null}c.classList.remove('hold')}
+  c.addEventListener('pointerdown',function(e){
+    if(c.classList.contains('out'))return;
+    e.preventDefault();
+    c.classList.add('hold');
+    t=setTimeout(function(){t=null;if(navigator.vibrate){try{navigator.vibrate(40)}catch(x){}}blown(c)},900);
+  });
+  ['pointerup','pointerleave','pointercancel'].forEach(function(ev){c.addEventListener(ev,stop)});
+  c.addEventListener('contextmenu',function(e){e.preventDefault()});
+  c.addEventListener('keydown',function(e){
+    if((e.key==='Enter'||e.key===' ')&&!c.classList.contains('out')){e.preventDefault();blown(c)}
+  });
+});
+function dodge(e){
+  if(e&&e.preventDefault)e.preventDefault();
+  var b=document.getElementById('no');
+  var x=(Math.random()-.5)*Math.min(220,window.innerWidth-160);
+  var y=(Math.random()-.5)*160;
+  b.style.transform='translate('+x+'px,'+y+'px)';
+}
+function yes(){go(6);burst(40)}
+</script>
+</body>
+</html>
